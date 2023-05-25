@@ -85,19 +85,82 @@ video {
     100% {opacity: 1;}
 }
 
-/* Footer */
-
-footer {
-    position: absolute;
-    top: 93.5%;  
-    left: 50%; 
-    transform: translate(-50%, -50%);
-    background-color: rgba(0, 0, 0, 0.7);
-    padding: 2rem 50vw;
+.hide-button {
+    visibility: hidden;
 }
 
-dialog {
-    height: 4rem;
-    width: 4rem;
-    background-color: red;
+/* Rules Modal */
+
+.rules-modal {
+    height: 22rem;
+    width: 18rem;
+    background-color: rgba(0, 0, 0, 0.9);
+    color: white;
+    font-weight: 700;
+    line-height: 1.7rem;
+    border-radius: 5px;
+}
+
+.rules-modal > i {
+    display: flex;
+    justify-content: end;
+    padding: 1rem;
+}
+
+.rules-modal > i:hover {
+    cursor: pointer;
+}
+
+.rules-modal > p {
+    text-align: center;
+}
+
+/* New Game Modal */
+
+.new-game-modal {
+    height: 15rem;
+    width: 18rem;
+    background-color: rgba(0, 0, 0, 0.9);
+    color: white;
+    font-weight: 700;
+    line-height: 1.7rem;
+    border-radius: 5px;
+}
+
+.new-game-modal > i {
+    display: flex;
+    justify-content: end;
+    padding: 1rem;
+}
+
+.new-game-modal > h3 {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.new-game-modal > input {
+    display: flex;
+    margin: auto;
+    width: 80%;
+    height: 1.5rem;
+    padding-left: 0.5rem;
+    font-size: 1.2rem;
+    font-weight: 600;
+}
+
+.new-game-modal > i:hover {
+    cursor: pointer;
+}
+
+.new-game-modal > button {
+    margin: 2rem auto;
+    width: 50%;
+    padding: 0.4rem 0;
+    display: flex;
+    justify-content: center;
+    font-weight: 600;
+}
+
+.new-game-modal > button:hover {
+    /* Still debating */
 }
