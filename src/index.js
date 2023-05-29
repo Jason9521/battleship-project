@@ -1,9 +1,10 @@
 import './style.css'
-import { createShip } from "./ship";
-import { loadMain } from './loadPages';
+import { createShip } from "./factories";
+import { loadMain, loadGameBoard } from './interface';
 import { clearDOMMenu } from './clearDOM';
 
 loadMain()
+
 
 
 
