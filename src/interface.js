@@ -119,7 +119,7 @@ function loadMain() {
         const comBoardNodes = document.getElementById('computerBoard').childNodes
 
         let playerGameboard = Gameboard(playerCoordinates, playerBoardNodes)
-        playerGameboard.deployCruiserXAxis()
+        playerGameboard.deployCarrier()
     })
 }
 
@@ -130,6 +130,12 @@ function loadGameBoard() {
     gameMessages.setAttribute('id', 'gameMessages');
     gameMessages.textContent = `It is ${nameValue}'s turn.`
     document.body.appendChild(gameMessages)
+
+    const axisToggle = document.createElement('button');
+    axisToggle.textContent = 'Axis Toggle'
+    axisToggle.classList.add('axis-toggle', 'gb-fade-in')
+    document.body.appendChild(axisToggle)
+
 
     const gameboardContainer = document.createElement('div');
     gameboardContainer.classList.add('gameboard-container', 'gb-fade-in')
@@ -170,18 +176,10 @@ function loadGameBoard() {
 
     // Generate gameboards
 
-
-
     for (let i = 1; i < 101; i++) {
             const gameboardBox = document.createElement('div');
             gameboardBox.classList.add('player-gb-box');
             gameboardBox.setAttribute('id', playerCoordinates[i - 1])
-            // gameboardBox.addEventListener('mouseover', () => {
-            //     gameboardBox.style.backgroundColor = 'green'
-            // })
-            // gameboardBox.addEventListener('mouseleave', () => {
-            //     gameboardBox.style.backgroundColor = 'white'
-            // })
             playerBoard.appendChild(gameboardBox)
         }
             
@@ -194,15 +192,6 @@ function loadGameBoard() {
     }
 }
 
-function placeOnXAxis() {
-    isXAxis = true
-    isYAxis = false
-}
-
-function placeOnYAxis() {
-    isXAxis = false
-    isYAxis = true
-}
 
 // const playerBattleship = Ship('Battleship', 4);
 // const playerCruiser = Ship('Cruiser', 3);
