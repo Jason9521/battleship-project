@@ -1,7 +1,7 @@
 'use strict'
 
 import { clearDOMMenu } from "./clearDOM";
-import { Ship, Gameboard } from "./factories";
+import { Ship, Gameboard, Player } from "./factories";
 
 // Global Variables
 
@@ -9,7 +9,10 @@ const playerCoordinates = ['PA1', 'PA2', 'PA3', 'PA4', 'PA5', 'PA6', 'PA7', 'PA8
 
 const computerCoordinates = ['CA1', 'CA2', 'CA3', 'CA4', 'CA5', 'CA6', 'CA7', 'CA8', 'CA9', 'CA10', 'CB1', 'CB2', 'CB3', 'CB4', 'CB5', 'CB6',  'CB7', 'CB8', 'CB9', 'CB10', 'CC1', 'CC2', 'CC3', 'CC4', 'CC5', 'CC6',  'CC7', 'CC8', 'CC9', 'CC10', 'CD1', 'CD2', 'CD3', 'CD4', 'CD5', 'CD6',  'CD7', 'CD8', 'CD9', 'CD10', 'CE1', 'CE2', 'CE3', 'CE4', 'CE5', 'CE6',  'CE7', 'CE8', 'CE9', 'CE10', 'CF1', 'CF2', 'CF3', 'CF4', 'CF5', 'CF6',  'CF7', 'CF8', 'CF9', 'CF10', 'CG1', 'CG2', 'CG3', 'CG4', 'CG5', 'CG6',  'CG7', 'CG8', 'CG9', 'CG10', 'CH1', 'CH2', 'CH3', 'CH4', 'CH5', 'CH6',  'CH7', 'CH8', 'CH9', 'CH10', 'CI1', 'CI2', 'CI3', 'CI4', 'CI5', 'CI6',  'CI7', 'CI8', 'CI9', 'CI10', 'CJ1', 'CJ2', 'CJ3', 'CJ4', 'CJ5', 'CJ6',  'CJ7', 'CJ8', 'CJ9', 'CJ10',]
 
+let playerGameboard
+
 let nameValue = ''
+let isXAxis = true
 
 // Main Menu
 
@@ -118,8 +121,9 @@ function loadMain() {
         const playerBoardNodes = document.getElementById('playerBoard').childNodes
         const comBoardNodes = document.getElementById('computerBoard').childNodes
 
-        let playerGameboard = Gameboard(playerCoordinates, playerBoardNodes)
-        playerGameboard.deployCarrier()
+        playerGameboard = Gameboard(playerCoordinates, playerBoardNodes)
+        playerGameboard.areShipsPlaced()
+        // deployFleet()
     })
 }
 
@@ -132,9 +136,23 @@ function loadGameBoard() {
     document.body.appendChild(gameMessages)
 
     const axisToggle = document.createElement('button');
-    axisToggle.textContent = 'Axis Toggle'
+    axisToggle.textContent = 'Toggle Y-Axis'
     axisToggle.classList.add('axis-toggle', 'gb-fade-in')
+    axisToggle.setAttribute('id', 'axisToggle')
     document.body.appendChild(axisToggle)
+
+    axisToggle.addEventListener('click', () => {
+        if (isXAxis) {
+            isXAxis = false
+            axisToggle.textContent = 'Toggle X-Axis'
+            playerGameboard.areShipsPlaced()
+
+        } else {
+            isXAxis = true
+            axisToggle.textContent = 'Toggle Y-Axis'
+            playerGameboard.areShipsPlaced()
+        }
+    })
 
 
     const gameboardContainer = document.createElement('div');
@@ -192,6 +210,11 @@ function loadGameBoard() {
     }
 }
 
+function deployFleet() {
+    
+}
+
+
 
 // const playerBattleship = Ship('Battleship', 4);
 // const playerCruiser = Ship('Cruiser', 3);
@@ -199,7 +222,7 @@ function loadGameBoard() {
 // const playerDestroyer = Ship('Destroyer', 2);
 
 
-export { loadMain, loadGameBoard , playerCoordinates, computerCoordinates}
+export { loadMain, loadGameBoard , playerCoordinates, computerCoordinates, isXAxis}
 
 
 

@@ -1,6 +1,6 @@
 'use strict'
 
-import { playerCoordinates, computerCoordinates } from "./interface";
+import { playerCoordinates, computerCoordinates, isXAxis } from "./interface";
 
 const Ship = (shipName, shipLength) => {
     return {
@@ -20,18 +20,29 @@ const Ship = (shipName, shipLength) => {
         placeShip() {
             this.isPlaced = true
         },
-
-        isShipPlaced() {
-            return this.isPlaced
-        },
     }
 };
 
 const Gameboard = (coordinates, nodeList) => {
     return {
-        isXAxis: true,
 
-        isYAxis: false,
+        carrierPlaced : false,
+        battleshipPlaced : false,
+        cruiserPlaced : false,
+        submarinePlaced : false,
+        destroyerPlaced : false,
+
+        areShipsPlaced() {
+            if (this.carrierPlaced == false) {
+                this.deployCarrier()
+            } else if (this.battleshipPlaced == false) {
+                this.deployBattleship()
+            } else if (this.cruiserPlaced == false) {
+                this.deployCruiser()
+            } else if (this.submarinePlaced) {
+                this.deploySubmarine
+            } else {this.deployDestroyer()}
+        },
 
         isValidBox(box1, box2) {
             return box1 === box2 ? true : false 
@@ -39,11 +50,11 @@ const Gameboard = (coordinates, nodeList) => {
 
         deployCarrier() {
 
-            if (this.isXAxis) {
+            if (isXAxis) {
 
                 nodeList.forEach(box => {
                     let boxSelect = coordinates.indexOf(box.id)
-
+                    
                     box.addEventListener('mouseover', () => {
                         box.style.backgroundColor = 'green'
                         nodeList[boxSelect + 10].style.backgroundColor = 'green'
@@ -59,8 +70,9 @@ const Gameboard = (coordinates, nodeList) => {
                         nodeList[boxSelect + 30].style.backgroundColor = 'white'
                         nodeList[boxSelect + 40].style.backgroundColor = 'white'
                     })
-
-                })} else {
+                })
+            
+            } else {
 
                     nodeList.forEach(box => {
                         let boxSelect = coordinates.indexOf(box.id)
@@ -91,20 +103,20 @@ const Gameboard = (coordinates, nodeList) => {
                             nodeList[boxSelect + 4].style.backgroundColor = 'white'
                         })
 
-                        box.addEventListener('click', () => {
-                            try {
-                                console.log('Works')
-                            } catch(err) {
-                                console.log(err)
-                            }
-                        })
+                        // box.addEventListener('click', () => {
+                        //     try {
+                        //         console.log('Works')
+                        //     } catch(err) {
+                        //         console.log(err)
+                        //     }
+                        // })
                     })
                 }    
             },
             
         deployBattleship() {
 
-            if (this.isXAxis) {
+            if (isXAxis) {
 
                 nodeList.forEach(box => {
                     let boxSelect = coordinates.indexOf(box.id)
@@ -122,7 +134,9 @@ const Gameboard = (coordinates, nodeList) => {
                         nodeList[boxSelect + 20].style.backgroundColor = 'white'
                         nodeList[boxSelect + 30].style.backgroundColor = 'white'
                     })
-                })} else {
+                })
+            
+            } else {
 
                     nodeList.forEach(box => {
                         let boxSelect = coordinates.indexOf(box.id)
@@ -154,7 +168,7 @@ const Gameboard = (coordinates, nodeList) => {
         
         deployCruiser() {
 
-            if (this.isXAxis) {
+            if (isXAxis) {
                 
                 nodeList.forEach(box => {
                     let boxSelect = coordinates.indexOf(box.id)
@@ -170,7 +184,9 @@ const Gameboard = (coordinates, nodeList) => {
                         nodeList[boxSelect + 10].style.backgroundColor = 'white'
                         nodeList[boxSelect + 20].style.backgroundColor = 'white'
                     })
-                })} else {
+                })
+            
+            } else {
 
                     nodeList.forEach(box => {
                         let boxSelect = coordinates.indexOf(box.id)
@@ -193,11 +209,12 @@ const Gameboard = (coordinates, nodeList) => {
                             nodeList[boxSelect + 2].style.backgroundColor = 'white'
                         })
                     })
-        }},
+                }
+            },
             
         deploySubmarine() {
 
-            if(this.isXAxis) {
+            if(isXAxis) {
 
                 nodeList.forEach(box => {
                     let boxSelect = coordinates.indexOf(box.id)
@@ -213,7 +230,9 @@ const Gameboard = (coordinates, nodeList) => {
                         nodeList[boxSelect + 10].style.backgroundColor = 'white'
                         nodeList[boxSelect + 20].style.backgroundColor = 'white'
                     })
-                })} else {
+                })
+            
+            } else {
 
                     nodeList.forEach(box => {
                         let boxSelect = coordinates.indexOf(box.id)
@@ -241,7 +260,7 @@ const Gameboard = (coordinates, nodeList) => {
             
         deployDestroyer() {
                 
-            if (this.isXAxis) {
+            if (isXAxis) {
                 nodeList.forEach(box => {
                     let boxSelect = coordinates.indexOf(box.id)
 
@@ -254,7 +273,9 @@ const Gameboard = (coordinates, nodeList) => {
                         box.style.backgroundColor = 'white'
                         nodeList[boxSelect + 10].style.backgroundColor = 'white'
                     })
-                })} else {
+                })
+
+            } else {
 
                     nodeList.forEach(box => {
                         let boxSelect = coordinates.indexOf(box.id)
@@ -272,8 +293,18 @@ const Gameboard = (coordinates, nodeList) => {
                             box.style.backgroundColor = 'white'
                             nodeList[boxSelect + 1].style.backgroundColor = 'white'
                         })
-                    })}   
+                    })
+                }   
             },
+        }
+    }
+
+    const Player = () => {
+
+        return {
+
+            
+
         }
     }
 
@@ -281,4 +312,4 @@ const Gameboard = (coordinates, nodeList) => {
 
 
 
-export {Ship, Gameboard}
+export {Ship, Gameboard, Player}
