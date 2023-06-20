@@ -1,7 +1,7 @@
 'use strict'
 
 import { clearDOMMenu } from "./clearDOM";
-import { Ship, Gameboard, Player } from "./factories";
+import { Ship, Gameboard, Player, controller, } from "./factories";
 
 // Global Variables
 
@@ -132,16 +132,22 @@ function loadGameBoard() {
     const gameMessages = document.createElement('p');
     gameMessages.classList.add('game-messages', 'gb-fade-in');
     gameMessages.setAttribute('id', 'gameMessages');
-    gameMessages.textContent = `It is ${nameValue}'s turn.`
+    // gameMessages.textContent = `It is ${nameValue}'s turn.`
     document.body.appendChild(gameMessages)
 
     const axisToggle = document.createElement('button');
-    axisToggle.textContent = 'Toggle Y-Axis'
+    if (isXAxis) {
+        axisToggle.textContent = 'Toggle Y-Axis'
+    } else {
+        axisToggle.textContent = 'Toggle X-Axis'
+    }
+        
     axisToggle.classList.add('axis-toggle', 'gb-fade-in')
     axisToggle.setAttribute('id', 'axisToggle')
     document.body.appendChild(axisToggle)
 
     axisToggle.addEventListener('click', () => {
+        controller.abort()
         if (isXAxis) {
             isXAxis = false
             axisToggle.textContent = 'Toggle X-Axis'
